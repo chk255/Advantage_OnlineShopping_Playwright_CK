@@ -2,15 +2,17 @@ import { Locator, Page} from "@playwright/test"
 import { basePage } from "../Utils/basePage"
 import { LoginPage } from "./loginPage";
 
+
 export class LandingPage extends basePage{
 
     private readonly LOGINICON:Locator
     readonly loginPage:LoginPage;
+    
     constructor(page:Page){
         super(page);
-        // fixed selector: removed stray characters from the original selector
         this.LOGINICON=page.locator("#menuUserLink");
         this.loginPage=new LoginPage(this.page)
+        
     }
 
     async goto(url:string):Promise<void>{
@@ -18,6 +20,7 @@ export class LandingPage extends basePage{
         await this.waitForPageLoad();
     }
     async goto_LoginPage() {
+       console.log("Landing Page Opened")
        await this.click(this.LOGINICON)
        return this.loginPage;
     }
