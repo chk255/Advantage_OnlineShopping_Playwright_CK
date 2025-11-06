@@ -1,9 +1,9 @@
 import {test , expect} from "@playwright/test"
-import { LandingPage } from "../pages/landingPage";
-import { LoginPage } from "../pages/loginPage";
-import { HomePage } from "../pages/HomePage";
-import  data  from "../Testdata/LoginTestData.json";
-import { ENV } from '../Utils/Env';
+import { LandingPage } from "../../pages/landingPage";
+import { LoginPage } from "../../pages/loginPage";
+import { HomePage } from "../../pages/HomePage";
+import  Jsondata  from "../../Testdata/LoginTestData.json";
+import { ENV } from '../../Utils/Env';
 
 let landingPage:LandingPage
 let loginPage:LoginPage
@@ -18,24 +18,25 @@ test.beforeEach(async({page})=>{
 
 })
 
-test.describe("Login with Valid Credential", async()=>{
+test.describe("Login Test", async()=>{
 
-    test("Login Positive Validation", async()=>{
+    test("Login With Valid Credentials",{tag:"@smoke"} , async()=>{
      await test.step("Validating Login Page Navigation", async()=>{
         expect(await loginPage.getLOGINWITHFACEBOOK()).toBeTruthy();
         expect(await loginPage.getLOGINWITHFACEBOOK()).toBeVisible();
         console.log("Navigated to Login Page")
     })
      await test.step("Login into Application", async()=>{
-        homePage=await loginPage.Login(data.uid , data.password);
+        homePage=await loginPage.Login(Jsondata.uname , Jsondata.password);
         console.log("Logged in to Application: Displaying homePage")
     })
-    await test.step("Successfully navigated to Dashboard Page", async()=>{
+     await test.step("Successfully navigated to Dashboard Page", async()=>{
         expect(await homePage.getDISPLAYEDUSER()).toBeTruthy();
         expect(await homePage.getDISPLAYEDUSER()).toBeVisible();
-        await expect(await homePage.getDISPLAYEDUSER()).toHaveText('chandan.kumar')
+        expect(await homePage.getDisplayedUserText()).toContain(Jsondata.uname)
         console.log("username displayed at homePage")
     })
 })
+   
     
 })

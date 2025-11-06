@@ -6,7 +6,7 @@ import { LoginPage } from "./loginPage";
 export class LandingPage extends basePage{
 
     private readonly LOGINICON:Locator
-    readonly loginPage:LoginPage;
+    private readonly loginPage:LoginPage;
     
     constructor(page:Page){
         super(page);
@@ -20,9 +20,11 @@ export class LandingPage extends basePage{
         await this.waitForPageLoad();
     }
     async goto_LoginPage() {
-       console.log("Landing Page Opened")
+       console.log("**Landing Page Opened**")
        await this.click(this.LOGINICON)
-       return this.loginPage;
+         // Wait for the login form to be visible before returning the page object
+         await this.loginPage.waitForLoginForm();
+         return this.loginPage;
     }
 
 }

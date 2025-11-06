@@ -12,8 +12,8 @@ export class basePage{
      async waitForPageLoad():Promise<void>{
         await this.page.waitForLoadState('networkidle');
      }
-     async waitForVisibility(locator:Locator) {
-        await locator.isVisible({timeout:3000})
+     async waitForVisibility(locator:Locator,timeout=15000) {
+        await locator.waitFor({ state: 'visible', timeout });
      }
       async click(Element: Locator) {
     // Ensure the element is visible and enabled before clicking
