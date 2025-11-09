@@ -9,7 +9,6 @@ let landingPage:LandingPage
 let loginPage:LoginPage
 let homePage:HomePage
 
-const AUT='https://www.advantageonlineshopping.com/#/';
 test.beforeEach(async({page})=>{
     landingPage=new LandingPage(page)
     await landingPage.goto(ENV.baseURL);
