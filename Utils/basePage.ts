@@ -2,9 +2,11 @@ import {Page , Locator} from "@playwright/test"
 
 export class basePage{
      readonly page:Page;
+     private readonly CartButton:Locator;
 
      constructor(page:Page){
         this.page=page;
+        this.CartButton=page.locator('#menuCart');
      }
      async navigate(url:string):Promise<void>{
         await this.page.goto(url , {waitUntil:'load'});
@@ -15,6 +17,12 @@ export class basePage{
      async waitForVisibility(locator:Locator,timeout=15000) {
         await locator.waitFor({ state: 'visible', timeout });
      }
+
+     async GoToCart(){
+      await this.waitForVisibility(this.CartButton);
+      await this.CartButton.click();
+     }
+
       async click(Element: Locator) {
     // Ensure the element is visible and enabled before clicking
     await Element.waitFor({ state: 'visible', timeout: 15000 });

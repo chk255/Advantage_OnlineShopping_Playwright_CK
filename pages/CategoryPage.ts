@@ -1,5 +1,6 @@
 import { Locator, Page , expect} from "@playwright/test"
 import { basePage } from "../Utils/basePage"
+import { ProductPage } from "./ProductPage"
 
 
 export class CategoryPage extends basePage{
@@ -7,6 +8,7 @@ export class CategoryPage extends basePage{
     private readonly CategoryPageTitle:Locator
     private readonly ProductsNames:Locator
     private readonly ProductsPrices:Locator
+    private readonly productPage:ProductPage
     
 
     constructor(page:Page){
@@ -15,6 +17,7 @@ export class CategoryPage extends basePage{
         this.CategoryPageTitle = this.page.locator("h3[class*='categoryTitle']");
         this.ProductsNames=page.locator('div.cell.categoryRight > ul >  li > p:first-of-type');
         this.ProductsPrices=page.locator('div.cell.categoryRight > ul >  li > p:last-of-type');
+        this.productPage=new ProductPage(page);
         
         
     }
@@ -34,14 +37,15 @@ export class CategoryPage extends basePage{
     //     return txt?.trim() ?? null;
     // }
     async SelectProduct(ProductName:string){
+        await this.getCategoryTitle();
         const Names = await this.getProductNames();
         for(const Name of Names){
             const text = await Name.textContent();
             if(text === ProductName){
-                await Name.click();
+                await this.click(Name);
             }
         }
-       // return this.categoryPage;
+        return this.productPage;
 
     }
 

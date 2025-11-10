@@ -1,17 +1,17 @@
 [
     {
-    "ProductName":"SPEAKERS"
+    "ProductCategory":"SPEAKERS"
     },
      {
-    "ProductName":"TABLETS"
+    "ProductCategory":"TABLETS"
     },
      {
-    "ProductName":"MICE"
+    "ProductCategory":"MICE"
     },
      {
-    "ProductName":"LAPTOPS"
+    "ProductCategory":"LAPTOPS"
     },
      {
-    "ProductName":"HEADPHONES"
+    "ProductCategory":"HEADPHONES"
     }
 ]

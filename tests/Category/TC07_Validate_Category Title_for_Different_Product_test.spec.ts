@@ -24,21 +24,13 @@ test.beforeEach(async({page})=>{
 for(let Product of Products){
 test.describe("Validate Category Title", async()=>{
 
-    test(`Validate Category Title at Category Page for ${Product.ProductName}`, async()=>{
+    test(`Validate Category Title at Category Page for ${Product.ProductCategory}`, async()=>{
      
-     await test.step("Login into Application", async()=>{
-        console.log("Logged in to Application: Displaying homePage")
-        expect(await homePage.getDISPLAYEDUSER()).toBeTruthy();
-        expect(await homePage.getDISPLAYEDUSER()).toBeVisible();
-        expect(await homePage.getDisplayedUserText()).toContain(Jsondata.uname)
-        console.log("username displayed at homePage")
-    })
     await test.step("Select Category", async()=>{
-        categoryPage=await homePage.SelectCategory(Product.ProductName);
-        expect(await categoryPage.getCategoryTitle() ).toBe(Product.ProductName);
+        categoryPage=await homePage.SelectCategory(Product.ProductCategory);
     })
       await test.step("Validate Category Title", async()=>{
-        expect(await categoryPage.getCategoryTitle()).toBe(Product.ProductName);
+        expect(await categoryPage.getCategoryTitle()).toBe(Product.ProductCategory);
     })
      
 })

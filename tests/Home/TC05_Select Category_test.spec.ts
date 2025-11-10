@@ -35,11 +35,11 @@ test.describe("Select Category", async()=>{
         console.log("username displayed at homePage")
     })
     await test.step("Select Category", async()=>{
-        categoryPage=await homePage.SelectCategory(Products[0].ProductName);
-        expect(await categoryPage.getCategoryTitle() ).toBe(Products[0].ProductName);
+        categoryPage=await homePage.SelectCategory(Products[0].ProductCategory);
+        expect(await categoryPage.getCategoryTitle() ).toBe(Products[0].ProductCategory);
     })
-      await test.step("Validate Category Title", async()=>{
-        expect(await categoryPage.getCategoryTitle()).toBe(Products[0].ProductName);
+      await test.step("Validate user navigates to Category Page", async()=>{
+        expect(await categoryPage.getCategoryTitle()).toBe(Products[0].ProductCategory);
     })
      
 })
